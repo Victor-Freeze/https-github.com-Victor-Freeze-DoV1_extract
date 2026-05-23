@@ -1,0 +1,6 @@
+{
+  "name": "Dolby Vision RPU Extractor",
+  "description": "An online interactive tool for parsing IVF AV1 streams and extracting Dolby Vision RPU metadata.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
