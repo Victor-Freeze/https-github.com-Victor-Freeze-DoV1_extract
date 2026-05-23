@@ -2,7 +2,7 @@
 
 `DoV1_extract` is an optimized Dolby Vision RPU (Reference Processing Unit) metadata extractor for AV1 video streams, featuring both a production-ready C++ command-line terminal program and an interactive React web interface.
 
-It parses AV1 bitstreams enclosed in IVF containers, unpacks ITU-T T.35 metadata OBUs (Open Bitstream Units) from Dolby Laboratories, performs bit-level EMDF (Extensible Metadata Format) header parsing, formats output to Standard HEVC UNSPEC62 NAL units (`00 00 00 01 7C 01`), and sorts them based on presentation timestamps (PTS).
+It parses AV1 bitstreams enclosed in IVF containers, unpacks ITU-T T.35 metadata OBUs (Open Bitstream Units) from Dolby Laboratories, performs bit-level EMDF (Extensible Metadata Format) header parsing, formats output to Standard Dolby Vision standalone RPU sequences separated by Annex B 4-byte start codes and prefixed with the RPU type code (`00 00 00 01 19 ...` which is fully compliant with `dovi_tool`), and sorts them based on presentation timestamps (PTS).
 
 ---
 

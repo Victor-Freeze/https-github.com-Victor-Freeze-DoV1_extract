@@ -2,7 +2,7 @@
 
 An interactive, high-performance web tool and optimized C++ command-line utility for parsing Dolby Vision RPU (Reference Processing Unit) metadata from AV1 video streams. 
 
-It processes AV1 bitstreams enclosed in IVF containers, unpacks Dolby Laboratories' ITU-T T.35 metadata Open Bitstream Units (OBUs), performs bit-level EMDF (Extensible Metadata Format) header parsing, formats the extracted RPU payloads to standard HEVC UNSPEC62 NAL units (`00 00 00 01 7C 01`), and sorts them based on presentation timestamps (PTS).
+It processes AV1 bitstreams enclosed in IVF containers, unpacks Dolby Laboratories' ITU-T T.35 metadata Open Bitstream Units (OBUs), performs bit-level EMDF (Extensible Metadata Format) header parsing, formats the extracted RPU payloads to standard Dolby Vision standalone RPU sequences separated by Annex B 4-byte start codes and prefixed with the RPU type code (`00 00 00 01 19 ...` which is fully compliant with `dovi_tool`), and sorts them based on presentation timestamps (PTS).
 
 ---
 

@@ -275,20 +275,17 @@ export async function extractRpusFromIvf(
   let totalWrittenSize = 0;
   const processedRpuData = rpuEntries.map(entry => {
     const rpuWithEp = addEmulationPrevention(entry.rpuData);
-    totalWrittenSize += 4 + 2 + rpuWithEp.length; // 4 bytes start code + 2 bytes NAL header + RPU length
+    totalWrittenSize += 4 + rpuWithEp.length; // 4 bytes start code + RPU payload length (standard .rpu file format)
     return rpuWithEp;
   });
 
   const outBuffer = new Uint8Array(totalWrittenSize);
   let writeOffset = 0;
   const startCode = new Uint8Array([0x00, 0x00, 0x00, 0x01]);
-  const nalHeader = new Uint8Array([0x7C, 0x01]);
 
   for (const rpuWithEp of processedRpuData) {
     outBuffer.set(startCode, writeOffset);
     writeOffset += 4;
-    outBuffer.set(nalHeader, writeOffset);
-    writeOffset += 2;
     outBuffer.set(rpuWithEp, writeOffset);
     writeOffset += rpuWithEp.length;
   }

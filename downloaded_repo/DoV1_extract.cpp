@@ -264,14 +264,15 @@ int main(int argc, char* argv[]) {
     }
 
     for (const auto& entry : rpu_entries) {
-        // Wrap in HEVC NAL: 00 00 00 01 7C 01 ...
+        // Standard standalone RPU files (.rpu/.bin) are formatted as a sequence of raw RPU payloads 
+        // starting with the 0x19 prefix, separated by Annex B 4-byte start codes (00 00 00 01), 
+        // with emulation prevention bytes (0x03) added. Standalone RPUs do NOT have the HEVC NAL 
+        // layer wrapper / NAL unit header (0x7C 0x01).
         std::vector<uint8_t> rpu_with_ep = add_emulation_prevention(entry.rpu_data);
         
         uint8_t start_code[] = {0x00, 0x00, 0x00, 0x01};
-        uint8_t nal_header[] = {0x7C, 0x01};
         
         out_file.write(reinterpret_cast<char*>(start_code), 4);
-        out_file.write(reinterpret_cast<char*>(nal_header), 2);
         out_file.write(reinterpret_cast<char*>(rpu_with_ep.data()), rpu_with_ep.size());
     }
 
